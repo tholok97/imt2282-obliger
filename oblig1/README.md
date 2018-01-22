@@ -1,4 +1,19 @@
-# Forventet utskrift
+# Oblig 1
+
+## Kvalitetsikring
+
+*TBA*
+
+* Hvordan er kvalitetsikret?
+* Hvordan kan en validere kvalitetsikringene?
+
+## Oppgave 4.5 i kompendiet (oblig)
+
+### Forklaring
+
+*TBA*
+
+### Forventet utskrift
 
 Prosesser på samme linje kjører i vilkårlig rekkefølge. (Skjer Samtidig).
 

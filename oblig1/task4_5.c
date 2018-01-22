@@ -15,18 +15,19 @@ void process(int number, int time) {
 int main(void) {
 
     // lagrer pid til original tråd
-    int originalpid = getpid();
+    pid_t originalpid = getpid();
 
     // variabel for piden til hver av trådene
-    int pid0, pid1, pid2, pid3, pid4, pid5;
+    pid_t pid0, pid1, pid2, pid3, pid4, pid5;
 
-    // fork frem trådene (BARE I ORIGINAL TRÅDEN)
+    // fork frem de første trådene (BARE I ORIGINAL TRÅDEN)
     if (getpid() == originalpid) pid0 = fork();
     if (getpid() == originalpid) pid1 = fork();
     if (getpid() == originalpid) pid2 = fork();
     if (getpid() == originalpid) pid3 = fork();
     if (getpid() == originalpid) pid4 = fork();
     if (getpid() == originalpid) pid5 = fork();
+
 
     // Oppgavene hver av trådene skal gjøre. Tråd x vil gjøre arbiedet som står
     //  under pidx == 0. Bruker sleep på å vente på tur
