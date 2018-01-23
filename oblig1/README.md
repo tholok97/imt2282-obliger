@@ -1,13 +1,18 @@
 # Oblig 1
 
-## Kvalitetsikring
+## Oppgave 4.5 i kompendiet
 
-*TBA*
+### Kvalitetsikring
 
-* Hvordan er kvalitetsikret?
-* Hvordan kan en validere kvalitetsikringene?
+* Bruker (enkel) make-fil til å holde styr på automatiske kvalitetstester:
+    * Kjører gcc med -Wall flagget
+    * Kjører clang-tidy med alle checks på all kode som skal igjennom kompilatoren.
+* Fokus på å kommentere kode heller for mye eller for lite.
+* Kode som kan feile (`fork()` og `waitpid(..)`) er wrappet i funksjoner som gir samme funksjonalitet, men håndterer potensielle feil ved å avslutte programmet med en debug-melding.
 
-## Oppgave 4.5 i kompendiet (oblig)
+### Hvordan validere kvalitetsikringen
+
+Gjør `make task4_5.out`. Dette skal bygge out-filen til denne oppgaven. Kommandoen skal ikke generere noe warnings eller errors. Se `Makefile` for detaljer.
 
 ### Forklaring
 
