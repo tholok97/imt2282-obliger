@@ -3,10 +3,10 @@
 ## Kvalitetsikring
 
 * Bruker (enkel) make-fil til å holde styr på automatiske kvalitetstester:
-    * Kjører gcc med -Wall flagget
-    * Kjører clang-tidy med alle checks på all kode som skal igjennom kompilatoren.
+    * Kjører `gcc` med `-Wall` flagget
+    * Kjører `clang-tidy` med alle checks på på all kode som skal igjennom kompilatoren.
 * Fokus på å kommentere kode heller for mye eller for lite.
-* Task 4.5 b: Kode som kan feile (`fork()` og `waitpid(..)`) er wrappet i funksjoner som gir samme funksjonalitet, men håndterer potensielle feil ved å avslutte programmet med en debug-melding.
+* **Task 4.5 b**: Kode som kan feile (`fork()` og `waitpid(..)`) er wrappet i funksjoner som gir samme funksjonalitet, men håndterer potensielle feil ved å avslutte programmet med en debug-melding.
 
 ## Hvordan validere kvalitetsikringen
 
@@ -47,3 +47,9 @@ Prosess 5 kjørte i 3 sekunder
 ### Forklaring
 
 Baserer meg på fila `thread-start-stop-semafor-hjelp1a.c` fra github-siden til emnet. Fortsetter i samme baner som denne fila hinter til.
+
+## Oppgave 5.6b i kompendiet
+
+### Forklaring
+
+Baserer meg på fila `3-en-producer-consumer-mutex-og-condvar.c` fra github-siden til emnet. Fortsetter i samme baner som denne fila hinter til.
