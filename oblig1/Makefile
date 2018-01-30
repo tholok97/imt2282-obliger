@@ -1,3 +1,3 @@
 %.out: %.c
-	gcc -Wall -o $@ $<
+	gcc -pthread -Wall -o $@ $<
 	clang-tidy $< -checks=* --
