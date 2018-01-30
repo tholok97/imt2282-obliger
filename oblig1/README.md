@@ -1,6 +1,6 @@
 # Oblig 1
 
-## Oppgave 4.5 i kompendiet
+## Oppgave 4.5b i kompendiet
 
 ### Kvalitetsikring
 
@@ -41,3 +41,7 @@ Prosess 3 kjørte i 2 sekunder
 
 Prosess 5 kjørte i 3 sekunder
 ```
+
+## Oppgave 5.6a i kompendiet
+
+*TBA*
