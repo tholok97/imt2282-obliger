@@ -48,6 +48,10 @@ Prosess 5 kjørte i 3 sekunder
 
 Baserer meg på fila `thread-start-stop-semafor-hjelp1a.c` fra github-siden til emnet. Fortsetter i samme baner som denne fila hinter til.
 
+### Svar på spørsmålet på slutten av oppgaven
+
+Malloc allokerer plass i data-området.
+
 ## Oppgave 5.6b i kompendiet
 
 ### Forklaring
