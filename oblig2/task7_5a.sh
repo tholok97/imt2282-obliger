@@ -31,7 +31,7 @@ while [[ "$MESSAGE" != '9' ]]; do
 
     case $MESSAGE in
     1)
-        echo "Du er $(whoami) og navnet til dette scriptet er $(basename $0)"
+        echo "Du er $(whoami) og navnet til dette scriptet er $(basename "$0")"
         ;;
     2)
         echo "Tid sisten siste boot: $(uptime --pretty)"
@@ -45,7 +45,7 @@ while [[ "$MESSAGE" != '9' ]]; do
         sleep 1
         Y=$(grep ctxt /proc/*/status | awk '{s+=$2} END {print s}')
 
-        echo "Context switches i det siste sekundet$(($Y-$X))"
+        echo "Context switches i det siste sekundet $((Y-X))"
         ;;
     5)
 
@@ -56,11 +56,11 @@ while [[ "$MESSAGE" != '9' ]]; do
         
         ;;
     6)
-        X=$(cat /proc/interrupts | awk '{s+=$2+$3+$4+$5} END {print s}')
+        X=$(awk '{s+=$2+$3+$4+$5} END {print s}' < /proc/interrupts)
         sleep 1
-        Y=$(cat /proc/interrupts | awk '{s+=$2+$3+$4+$5} END {print s}')
+        Y=$(awk '{s+=$2+$3+$4+$5} END {print s}' < /proc/interrupts)
 
-        echo "Interrupts i siste sekund: $(($Y-$X))"
+        echo "Interrupts i siste sekund: $((Y-X))"
         ;;
     *)
         echo "$MESSAGE???"
