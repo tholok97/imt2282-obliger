@@ -1,3 +1,6 @@
+# ignore memfiles
+*.meminfo
+
 # Ignore temp directories
 bin/*
 build/*
