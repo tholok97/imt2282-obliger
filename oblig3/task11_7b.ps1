@@ -3,6 +3,7 @@
 function doMenu() {
 
     Write-Host @"
+
 1 - Hvem er jeg og hva er navnet på dette scriptet?
 2 - Hvor lenge er det siden siste boot?
 3 - Hvor mange prosesser og tråder finnes?
@@ -22,14 +23,62 @@ $ans = doMenu
 while ($ans -ne "9") {
 
     switch ($ans) {
-        1 { Write-Host "You pressed 1" }
-        2 { Write-Host "You pressed 2" }
-        3 { Write-Host "You pressed 3" }
-        4 { Write-Host "You pressed 4" }
-        5 { Write-Host "You pressed 5" }
-        6 { Write-Host "You pressed 6" }
-        9 { Write-Host "You pressed 9" }
-        default { Write-Host "$ans ????" }
+        1 { 
+            $username=$env:username
+            $scriptName=$MyInvocation.MyCommand.Name
+            Write-Host "Jeg er $username, og navnet på dette scriptet er $scriptName"
+        }
+        2 { 
+            $bootTime=((Get-CimInstance Win32_OperatingSystem).LastBootUpTime)
+            $nowTime=(Get-Date)
+            $elapsedTimeString=(New-Timespan -Start $bootTime -End $nowTime)
+            Write-Host "Tid siden siste boot: $elapsedTimeString" 
+        }
+        3 { 
+
+            
+            # found with `(Get-WmiObject Win32_OperatingSystem) 
+            # | Get-Member | Where-Object { $_.Name -match "process" }`
+            $numProcesses=((Get-CimInstance Win32_OperatingSystem).NumberOfProcesses)
+
+            $numThreads=((Get-CimInstance Win32_Thread).Count)
+
+
+
+            Write-Host "Der er $numProcesses prosesser og $numThreads tråder" 
+        }
+        4 { 
+
+            # found with `(Get-CimInstance 
+            # Win32_PerfFormattedData_PerfOS_System) | Get-Member 
+            # | Where-Object { $_.Name -match "context" }`
+            $numCtxSwitchLastSec=((Get-CimInstance `
+                    Win32_PerfFormattedData_PerfOS_System).ContextSwitchesPersec)
+
+            Write-Host "Context switcher siste sekund: $numCtxSwitchLastSec" 
+        }
+        5 { 
+
+            # found with `(Get-CimInstance 
+            # Win32_PerfFormattedData_Counters_ProcessorInformation) |
+            # Get-Member | Where-Object { $_.Name -match "privilege" }`
+            $percPrivTime=((Get-CimInstance `
+                    Win32_PerfFormattedData_Counters_ProcessorInformation).PercentPrivilegedTime)
+
+            $percUsermode=0
+
+
+            Write-Host "Prosent CPU tid i kernel (privileged) / usermode: $percPrivTime / $percUsermode" 
+        }
+        6 { 
+            Write-Host "You pressed 6" 
+        }
+        9 { 
+            Write-Host "You pressed 9" 
+        }
+        default { 
+            Write-Host "$ans ????" 
+        }
 
     }
 
