@@ -62,22 +62,30 @@ while ($ans -ne "9") {
             # found with `(Get-CimInstance 
             # Win32_PerfFormattedData_Counters_ProcessorInformation) |
             # Get-Member | Where-Object { $_.Name -match "privilege" }`
-            $percPrivTime=((Get-CimInstance `
-                    Win32_PerfFormattedData_Counters_ProcessorInformation).PercentPrivilegedTime)
+            $percPrivTime=(((Get-CimInstance Win32_PerfFormattedData_Counters_ProcessorInformation) `
+                    | Where-Object { $_.Name -eq "_TOTAL" }).PercentPrivilegedTime)
 
-            $percUsermode=0
+            # found with `(Get-CimInstance Win32_PerfFormattedData_Counters_ProcessorInformation) 
+            # | Get-Member | Where-Object { $_.Name -match "time" }`
+            $percUsermode=(((Get-CimInstance `
+                    Win32_PerfFormattedData_Counters_ProcessorInformation) | `
+                    Where-Object { $_.Name -eq "_TOTAL" }).PercentUserTime)
 
 
             Write-Host "Prosent CPU tid i kernel (privileged) / usermode: $percPrivTime / $percUsermode" 
         }
         6 { 
-            Write-Host "You pressed 6" 
-        }
-        9 { 
-            Write-Host "You pressed 9" 
+
+            # found with `(Get-CimInstance Win32_PerfFormattedData_Counters_ProcessorInformation) 
+            # | Get-Member | Where-Object { $_.Name -match "inter" }`
+            $interruptsLastSec=(((Get-CimInstance `
+                    Win32_PerfFormattedData_Counters_ProcessorInformation) `
+                    | Where-Object { $_.Name -eq "_TOTAL" }).InterruptsPersec)
+
+            Write-Host "Der var $interruptsLastSec interrupts det siste sekundet" 
         }
         default { 
-            Write-Host "$ans ????" 
+            Write-Host "$ans er ikke en gyldig kommando" 
         }
 
     }
