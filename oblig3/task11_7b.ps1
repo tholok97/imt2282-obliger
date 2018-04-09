@@ -2,11 +2,11 @@
 # Print menu and read menu choice
 function doMenu() {
 
-    Write-Host @"
+    Write-Output @"
 
-1 - Hvem er jeg og hva er navnet på dette scriptet?
+1 - Hvem er jeg og hva er navnet paa dette scriptet?
 2 - Hvor lenge er det siden siste boot?
-3 - Hvor mange prosesser og tråder finnes?
+3 - Hvor mange prosesser og traader finnes?
 4 - Hvor mange context switch'er fant sted siste sekund?
 5 - Hvor stor andel av CPU-tiden ble benyttet i kernelmode og i usermode siste sekund?
 6 - Hvor mange interrupts fant sted siste sekund?
@@ -26,13 +26,13 @@ while ($ans -ne "9") {
         1 { 
             $username=$env:username
             $scriptName=$MyInvocation.MyCommand.Name
-            Write-Host "Jeg er $username, og navnet på dette scriptet er $scriptName"
+            Write-Output "Jeg er $username, og navnet paa dette scriptet er $scriptName"
         }
         2 { 
             $bootTime=((Get-CimInstance Win32_OperatingSystem).LastBootUpTime)
             $nowTime=(Get-Date)
             $elapsedTimeString=(New-Timespan -Start $bootTime -End $nowTime)
-            Write-Host "Tid siden siste boot: $elapsedTimeString" 
+            Write-Output "Tid siden siste boot: $elapsedTimeString" 
         }
         3 { 
 
@@ -45,7 +45,7 @@ while ($ans -ne "9") {
 
 
 
-            Write-Host "Der er $numProcesses prosesser og $numThreads tråder" 
+            Write-Output "Der er $numProcesses prosesser og $numThreads traader" 
         }
         4 { 
 
@@ -55,7 +55,7 @@ while ($ans -ne "9") {
             $numCtxSwitchLastSec=((Get-CimInstance `
                     Win32_PerfFormattedData_PerfOS_System).ContextSwitchesPersec)
 
-            Write-Host "Context switcher siste sekund: $numCtxSwitchLastSec" 
+            Write-Output "Context switcher siste sekund: $numCtxSwitchLastSec" 
         }
         5 { 
 
@@ -72,7 +72,7 @@ while ($ans -ne "9") {
                     Where-Object { $_.Name -eq "_TOTAL" }).PercentUserTime)
 
 
-            Write-Host "Prosent CPU tid i kernel (privileged) / usermode: $percPrivTime / $percUsermode" 
+            Write-Output "Prosent CPU tid i kernel (privileged) / usermode: $percPrivTime / $percUsermode" 
         }
         6 { 
 
@@ -82,10 +82,10 @@ while ($ans -ne "9") {
                     Win32_PerfFormattedData_Counters_ProcessorInformation) `
                     | Where-Object { $_.Name -eq "_TOTAL" }).InterruptsPersec)
 
-            Write-Host "Der var $interruptsLastSec interrupts det siste sekundet" 
+            Write-Output "Der var $interruptsLastSec interrupts det siste sekundet" 
         }
         default { 
-            Write-Host "$ans er ikke en gyldig kommando" 
+            Write-Output "$ans er ikke en gyldig kommando" 
         }
 
     }
