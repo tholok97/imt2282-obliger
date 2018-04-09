@@ -10,6 +10,8 @@ foreach ($id in $args) {
 
     # fetch info to be printed to file
     # I'M PRESUMING that the command returns a size in bytes
+    $contents+="*********** Minne info om prosess med PID $id ***********"
+    $contents+="`n"
     $contents+="Virtual Memory Size: $($(Get-Process -Id $id).VM) byte(s)"
     $contents+="`n"
     $contents+="Working Set Size: $($(Get-Process -Id $id).WS) byte(s)"
